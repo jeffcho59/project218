@@ -2,25 +2,33 @@
 
 ini_set('auto_detect_line_endings',TRUE);
 
-$variablelist = fopen('variablelist.csv', 'r');
-while (($line = fgetcsv($variablelist)) !== FALSE) {
-    foreach($lines as $data) {
-        list($variable[],$name[])=$line;
-    }
-    sort($line);
-    print_r($line);
-}
-fclose($variablelist);
+class arrays {
+    
+    public function csv_to_array($filename='', $delimiter=',') {
+        if(!file_exists($filename) || !is_readable($filename))
+            return FALSE;
 
-
-$universities = fopen('universities.csv', 'r');
-while (($line = fgetcsv($universities)) !== FALSE) {
-    foreach($lines as $data) {
-        list($variable[],$name[])=$line;
+        $header = NULL;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== FALSE) {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
+                if(!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+        return $data;
     }
-    sort($line);
-    print_r($line);
+
+    //print_r(csv_to_array('variablelist.csv'));
 }
-fclose($file);
+
+$variablelist = new arrays;
+print_r ($variablelist->csv_to_array('variablelist.csv'));
+
+$universities = new arrays;
+print_r ($universities->csv_to_array('universities.csv'));
 
 ?>
