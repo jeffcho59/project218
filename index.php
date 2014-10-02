@@ -1,6 +1,15 @@
 <?php
 
-ini_set('auto_detect_line_endings',TRUE);
+ini_set('auto_detect_line_endings', TRUE);
+
+
+$rows = array_map('str_getcsv', file('variablelist2.csv'));
+$header = array_shift($rows);
+$var = array();
+foreach ($rows as $row) {
+  $var[] = array_combine($header, $row);
+}
+print_r($var);
 
 class arrays {
     
@@ -23,10 +32,8 @@ class arrays {
     }
 }
 
-$variablelist = new arrays;
-print_r ($variablelist->csv_to_array('variablelist.csv'));
-
 $universities = new arrays;
 print_r ($universities->csv_to_array('universities.csv'));
+
 
 ?>
