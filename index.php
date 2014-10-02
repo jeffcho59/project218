@@ -21,8 +21,6 @@ class arrays {
         }
         return $data;
     }
-
-    //print_r(csv_to_array('variablelist.csv'));
 }
 
 $variablelist = new arrays;
