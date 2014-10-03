@@ -22,22 +22,14 @@ class toArray{
         
         return $records;
     }
-    
-    public function record($records){
-        foreach($records as $record) {
-            foreach($record as $key => $value) {
-                echo $key . ': ' . $value .  "</br> \n";
-            }
-            echo '<hr>';
-        }
-    }
 
-    public function universities_link($universities_records){
+    public function school_link($school_records){ //creates links
+        $r_name = array_column($school_records, 'INSTNM');
         if(empty($_GET)) {
             $i = 1;
-            foreach($universities_records as $universities_record) {
-                staticLinks::html($universities_records, $i);
-                $i++;
+            foreach($school_records as $school_record) {
+                static_html::links($school_records, $i, $r_name);
+                $i++;  
             }
         }
     }
@@ -45,14 +37,47 @@ class toArray{
 
 
 
-class staticLinks{
-    static public function html($universities_records, $i){
-        $universities_record_num = $i - 1;
-        $universities_records = $i - 1;
-        echo '<a href=' . '"http://localhost/project218/index.php?school_record=' . $universities_record_num . '"' . '>University ' . $i . ' </a>';
+class static_html{
+  static public function links($school_records, $i, $r_name){ //link creation function
+     $school_record_num = $i - 1;
+     echo '<a href=' . '"http://localhost/php218/proj1/college.php?school_record=' .               $school_record_num . '"' . '>' . $r_name[$i] . ' </a>';
 
-        echo '</p>';
-    }
+     echo '</p>';
+  }
+  
+    
+  static public function table($vals){ //table creation function
+       echo "<table border = 1 bordercolor= black cellspacing=0 cellpadding=5 style='font-size:14pt'>";
+     echo "<tr>";
+
+
+    foreach($vals as $key => $value){
+        echo '<th>', $key, '</th>';
+        echo '<td>', $value, '</td>';
+        echo '</tr>';
+      }
+
+     echo '</table>';
+
+   }    
+    
 }
+
+
+
+$obj = new toArray; //create new object
+
+$myrecords = $obj->makeArray("variablelist2.csv"); //import first csv into array
+$schools = $obj->makeArray("universities.csv"); //import secont csv into seperate array
+
+//$variables = array_column($myrecords, 'varTitle', 'varname' ); 
+//take varTitle and varname out of dictionary
+
+$display = $obj->school_link($schools); //creates links 
+$school = $schools[$_GET['school_record']];
+
+$vals= array_combine($myrecords, $school); //combines arrays into one
+$table = static_html::table($vals)  //create table
+
 
 ?>
