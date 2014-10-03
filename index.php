@@ -49,7 +49,7 @@ class staticLinks{
     static public function html($universities_records, $i){
         $universities_record_num = $i - 1;
         $universities_records = $i - 1;
-        echo '<a href=' . '"http://localhost/project218/index.php?school_record=' . $universities_record_num . '"' . '>School ' . $i . ' </a>';
+        echo '<a href=' . '"http://localhost/project218/index.php?school_record=' . $universities_record_num . '"' . '>University ' . $i . ' </a>';
 
         echo '</p>';
     }
