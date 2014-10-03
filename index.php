@@ -7,7 +7,7 @@ class toArray{
         $records = array();
         ini_set('auto_detect_line_endings',TRUE);
         if (($handle = fopen($file, "r")) !== FALSE) {
-            while (($row = fgetcsv($handle, 5000, ",")) !== FALSE) {
+            while (($row = fgetcsv($handle, 4096, ",")) !== FALSE) {
                 if($first_row == TRUE) {
                     $column_heading = $row;
                     $first_row = FALSE;
@@ -31,15 +31,28 @@ class toArray{
             echo '<hr>';
         }
     }
-    
-    public function uni($uniRecords){
+
+    public function universities_link($universities_records){
         if(empty($_GET)) {
             $i = 1;
-            foreach($uniRecords as $uniRecord) {
-                staticLinks::html($uniRecords, $i);
+            foreach($universities_records as $universities_record) {
+                staticLinks::html($universities_records, $i);
                 $i++;
             }
         }
     }
 }
+
+
+
+class staticLinks{
+    static public function html($universities_records, $i){
+        $universities_record_num = $i - 1;
+        $universities_records = $i - 1;
+        echo '<a href=' . '"http://localhost/project218/index.php?school_record=' . $universities_record_num . '"' . '>School ' . $i . ' </a>';
+
+        echo '</p>';
+    }
+}
+
 ?>
