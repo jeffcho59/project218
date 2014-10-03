@@ -22,5 +22,14 @@ class toArray{
         
         return $records;
     }
+    
+    public function record($records){
+        foreach($records as $record) {
+            foreach($record as $key => $value) {
+                echo $key . ': ' . $value .  "</br> \n";
+            }
+            echo '<hr>';
+        }
+    }
 }
 ?>
