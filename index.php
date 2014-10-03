@@ -31,5 +31,15 @@ class toArray{
             echo '<hr>';
         }
     }
+    
+    public function uni($uniRecords){
+        if(empty($_GET)) {
+            $i = 1;
+            foreach($uniRecords as $uniRecord) {
+                staticLinks::html($uniRecords, $i);
+                $i++;
+            }
+        }
+    }
 }
 ?>
