@@ -1,39 +1,26 @@
 <?php
 
-ini_set('auto_detect_line_endings', TRUE);
-
-
-$rows = array_map('str_getcsv', file('variablelist2.csv'));
-$header = array_shift($rows);
-$var = array();
-foreach ($rows as $row) {
-  $var[] = array_combine($header, $row);
-}
-print_r($var);
-
-class arrays {
+class toArray{
     
-    public function csv_to_array($filename='', $delimiter=',') {
-        if(!file_exists($filename) || !is_readable($filename))
-            return FALSE;
-
-        $header = NULL;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== FALSE) {
-            while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
-                if(!$header)
-                    $header = $row;
-                else
-                    $data[] = array_combine($header, $row);
+    public function makeArray($file){
+        $first_row = TRUE;
+        $records = array();
+        ini_set('auto_detect_line_endings',TRUE);
+        if (($handle = fopen($file, "r")) !== FALSE) {
+            while (($row = fgetcsv($handle, 5000, ",")) !== FALSE) {
+                if($first_row == TRUE) {
+                    $column_heading = $row;
+                    $first_row = FALSE;
+                } 
+                else {
+                    $record = array_combine($column_heading, $row);
+                    $records[] = $record;
+                }
             }
             fclose($handle);
         }
-        return $data;
+        
+        return $records;
     }
 }
-
-$universities = new arrays;
-print_r ($universities->csv_to_array('universities.csv'));
-
-
 ?>
