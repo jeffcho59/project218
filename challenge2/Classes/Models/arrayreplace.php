@@ -6,7 +6,7 @@ interface turntoarray{
 public function array_replace($arrays1, $arrays2, $key_1, $value_1);
 }
 
-class arrayassign implements turntoarray{
+class arrayreplace implements turntoarray{
 	public function array_replace($arrays1, $arrays2, $key_1, $value_1){
       foreach($arrays1 as $array){
 		
