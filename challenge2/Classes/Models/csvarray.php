@@ -1,8 +1,13 @@
 <?php
 namespace Classes\Models;
 
+interface csv{
+    public static function importcsv($file); 
+    public static function school_link($school_records);
+    
+}
 
-class csvarray{
+class csvarray implements csv{
  public function importcsv($file){
     $first_row = TRUE;
     $records = array();
@@ -34,17 +39,7 @@ class csvarray{
      }
   }
 
-   public function array_replace($arrays1, $arrays2, $key_1, $value_1){
-      foreach($arrays1 as $array){
-		
-	     $replace[$array[$key_1]]=  $array[$value_1];		  
-      }
-      foreach($arrays2 as $array2 ){
-		  $vals[] = array_combine($replace,$array2);
-
-	   }
-	   return $vals;
-   } 	
+    	
 	
     
     

@@ -1,7 +1,12 @@
 <?php
 namespace Classes\Models;
-    
-class Html{
+
+interface html_interface{
+    public static function links($school_record, $i);
+    public static function table($vals);
+}
+
+class Html implements html_interface{
     static public function links($school_record, $i){ 
 	       $school_record_num = $i ;
             echo '<a href=' . '"http://web.njit.edu/~jc389/phpproject/challenge2/index.php?school_record=' . $school_record_num . '"' . '>' . $school_record['Institution (entity) name'] . '                    </a>';
