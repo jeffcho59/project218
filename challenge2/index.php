@@ -18,12 +18,13 @@ spl_autoload_register( function ($className) {
 });
 
 $main = new Classes\Models\csvarray();
+//$arrayassign = new Classes\Models\arrayreplace();
 $html = new Classes\Models\html();
 
 $myrecords = $main->importcsv("variablelist.csv"); 
 $schools = $main->importcsv("universities.csv"); 
 
-$vals = $main->array_replace($myrecords, $schools, 'varname', 'varTitle');
+$vals = \Classes\Models\arrayreplace::array_replace($myrecords, $schools, 'varname', 'varTitle');
 $display = $main->school_link($vals);  
 $table = $html->table($vals); 
 
